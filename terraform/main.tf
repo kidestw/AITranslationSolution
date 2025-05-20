@@ -102,13 +102,6 @@ resource "azurerm_linux_function_app" "function_app" {
   identity {
     type = "SystemAssigned"
   }
-
-  # --- Note on Managed Identity ---
-  # For enhanced security, consider granting the Function App's Managed Identity (principal ID: azurerm_linux_function_app.function_app.identity[0].principal_id)
-  # the following RBAC roles and modifying the function code (__init__.py) to use DefaultAzureCredential:
-  # 1. "Storage Blob Data Contributor" on the Storage Account (azurerm_storage_account.storage.id)
-  # 2. "Cognitive Services User" on your *existing* Translator resource (you'll need its resource ID).
-  # This removes the need for STORAGE_CONNECTION_STRING and TRANSLATOR_API_KEY in app_settings.
 }
 
 # --- Web App ---
@@ -134,7 +127,6 @@ resource "azurerm_linux_web_app" "webapp" {
     # Command to start the Flask app using Gunicorn
     //startup_command = "gunicorn --bind=0.0.0.0 --timeout 600 app:app"
     //detailed_error_logging_enabled = true
-    # Ensure Pip installs packages from requirements.txt during deployment
   
   }
 
@@ -143,8 +135,6 @@ resource "azurerm_linux_web_app" "webapp" {
     "STORAGE_CONNECTION_STRING" = azurerm_storage_account.storage.primary_connection_string
     "INPUT_CONTAINER_NAME"      = azurerm_storage_container.input_documents.name
     "TRANSLATED_CONTAINER_NAME" = azurerm_storage_container.translated_documents.name
-    # Add other settings like Flask secret key if needed (use Key Vault ideally)
-    # "FLASK_SECRET_KEY" = "a-very-secret-key-replace-me" 
     "SCM_DO_BUILD_DURING_DEPLOYMENT" = "true" # Ensures pip install runs during zip deploy
     "ENABLE_ORYX_BUILD"              = "true" # Use Oryx build system
   }
@@ -152,12 +142,4 @@ resource "azurerm_linux_web_app" "webapp" {
   identity {
     type = "SystemAssigned"
   }
-
-  # --- Note on Managed Identity & SAS Tokens ---
-  # If translated_container_access_type is 'private', the Web App needs a way to grant download access. Options:
-  # 1. Generate SAS Tokens: The backend code (app.py) can generate short-lived SAS tokens for download links.
-  #    Requires STORAGE_CONNECTION_STRING or Managed Identity with "Storage Blob Data Reader" or "Storage Blob Delegator" role.
-  # 2. Use Managed Identity + RBAC: Grant the Web App's Managed Identity (principal ID: azurerm_linux_web_app.webapp.identity[0].principal_id)
-  #    the "Storage Blob Data Reader" role on the Storage Account (azurerm_storage_account.storage.id) or specific container.
-  #    The web app code then needs modification to use DefaultAzureCredential to access blobs.
 }
