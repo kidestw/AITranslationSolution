@@ -1,9 +1,6 @@
 ---
 
 # 🌐 AI-Powered Document Translator 🚀
-
-[![NEDAMCO Logo](https://nedamcoafrica.com/wp-content/uploads/2023/08/Nedamco-Africa-Logo-1.svg)](https://www.nedamco.com)
-
 ---
 
 Welcome to the **AI-Powered Document Translator**! This solution leverages the power of Azure AI services to provide seamless and accurate document translation. Simply upload your document, choose your desired language, and download the translated version.
@@ -30,7 +27,7 @@ This solution orchestrates a series of Azure services to deliver your translated
 4.  **Store:** The translated document is then saved back to an Azure Storage Account.
 5.  **Download:** You can then download your translated document from the storage.
 
-6.  ---
+---
 
 ## 🚀 Getting Started
 
@@ -46,9 +43,9 @@ To use the AI-Powered Document Translator, follow these simple steps:
 
 This solution is built upon the following core Azure services:
 
-* [![Azure Storage Logo](https://iconduck.com/icons/241899/azure-blob-storage-color.svg)](https://azure.microsoft.com/en-us/products/storage/) **Azure Storage Account:** Used for storing both original and translated documents.
-* [![Azure Functions Logo](https://iamvector.com/svg/azure-functions.svg)](https://azure.microsoft.com/en-us/products/functions/) **Azure Functions:** Serverless compute to orchestrate the translation workflow and interact with Azure Translate.
-* [![Azure AI Logo](https://img.icons8.com/color/48/azure-ai-services.png)](https://azure.microsoft.com/en-us/products/ai-services/) **Azure AI (Translator):** The core AI service providing the translation capabilities.
+* **Azure Storage Account:** Used for storing both original and translated documents.
+* **Azure Functions:** Serverless compute to orchestrate the translation workflow and interact with Azure Translate.
+* **Azure AI (Translator):** The core AI service providing the translation capabilities.
 
 ---
 
