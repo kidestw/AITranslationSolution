@@ -1,0 +1,25 @@
+{
+  "bindings": [
+    {
+      "name": "inputblob",
+      "type": "blobTrigger",
+      "direction": "in",
+      "path": "input-documents/{name}",
+      "connection": "AzureWebJobsStorage"
+    },
+    {
+      "name": "outputblob",
+      "type": "blob",
+      "direction": "out",
+      "path": "translated-documents/{name}",
+      "connection": "AzureWebJobsStorage"
+    },
+    {
+      "name": "logblob",
+      "type": "blob",
+      "direction": "out",
+      "path": "log-files/{name}.log",
+      "connection": "AzureWebJobsStorage"
+    }
+  ]
+}

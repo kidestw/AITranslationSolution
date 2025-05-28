@@ -1,0 +1,13 @@
+# Base Azure Functions library
+azure-functions
+python-docx
+
+# Azure SDKs
+azure-identity>=1.12.0 # Recommended for potential future Managed Identity use
+azure-storage-blob>=12.13.0
+azure-ai-translation-document>=1.0.0b2 # Using the preview version for Document Translation
+
+# Standard libraries (implicitly used but good to list)
+# requests # If making direct HTTP calls (not needed here)
+requests
+PyPDF2
